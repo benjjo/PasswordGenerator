@@ -1,5 +1,6 @@
 
 import java.util.concurrent.ThreadLocalRandom;
+import javax.swing.*;
 
 /**
  * Generates a random set of keyboard characters to the length of the specified argument.
@@ -10,21 +11,28 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Main {
 
     public static void main(String[] args){
-        new Main(8); // temporary magic number
+        int repetitions = 0;
+        try {
+            repetitions = Integer.parseInt(JOptionPane.showInputDialog(null, "How long do you want the password?"));
+        }catch (Exception anException){
+            JOptionPane.showMessageDialog(null, "Please enter a number.");
+        }
+        new Main(repetitions);
     }
 
-    public Main(int args){
-        System.out.println(this.generator(args));
+    private Main(int rep){
+        JOptionPane.showMessageDialog(null, this.generator(rep));
     }
 
     /**
      * Generates a random char between 33-128 and assigns that char to the
      * string var to the length of the args argument.
      */
-    public String generator(int args){
-        String val = "";
-        for(int i = 0; i < args; i++){
-            val = val + (char)ThreadLocalRandom.current().nextInt(33, 128);
+    private String generator(int rep){
+        //StringBuilder val = new StringBuilder(rep);
+        String val = new String();
+        for(int i = 0; i < rep; i++) {
+            val = val + (char) ThreadLocalRandom.current().nextInt(33, 128);
         }
         return val;
     }
