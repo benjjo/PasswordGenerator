@@ -1,26 +1,26 @@
-import java.util.Random;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
 
-    private Random rand;
-
     public static void main(String[] args){
-        new Main(8);
+        new Main(8); // temporary magic number
     }
 
     public Main(int args){
-        this.rand = new Random();
         System.out.println(this.generator(args));
     }
 
     /**
-     * Sets a random int to the
+     * Generates a random char between 33-128 and assigns that char to the
+     * string var to the length of the args argument.
      */
     public String generator(int args){
         String val = "";
         for(int i = 0; i < args; i++){
-            val = val + Integer.toHexString(rand.nextInt(15));
+            val = val + (char)ThreadLocalRandom.current().nextInt(33, 128);
         }
         return val;
     }
+
 }
