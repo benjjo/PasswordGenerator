@@ -28,11 +28,11 @@ public class Main {
      * Generates a random char between 33-128 and assigns that char to the
      * string var to the length of the args argument.
      */
-    private String generator(int rep){
-        //StringBuilder val = new StringBuilder(rep);
-        String val = new String();
+    private StringBuilder generator(int rep){
+        StringBuilder val = new StringBuilder(rep);
+        //String val = new String();
         for(int i = 0; i < rep; i++) {
-            val = val + (char) ThreadLocalRandom.current().nextInt(33, 128);
+            val.append((char) ThreadLocalRandom.current().nextInt(33, 128));
         }
         return val;
     }
