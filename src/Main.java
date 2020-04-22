@@ -47,7 +47,7 @@ public class Main {
 
         StringBuilder val = new StringBuilder(this.getLength());
         int start = 0, finish;
-        List<Character> aList = new ArrayList<>();
+        List<Character> aList;
 
             if(this.getStrength() == 1) {
                 finish = Main.LISTS.ALPHA_NUMERIC.size();
