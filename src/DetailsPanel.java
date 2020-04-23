@@ -19,17 +19,23 @@ public class DetailsPanel extends JPanel implements ActionListener {
 
     public DetailsPanel() {
         Dimension size = getPreferredSize();
-        size.width = 250;
+        size.width = 260;
         setPreferredSize(size);
 
         setBorder(BorderFactory.createTitledBorder("Control Panel"));
 
+        ////SETUP THE LABELS ////
         JLabel passwordLabel = new JLabel("Password length: ");
+        JLabel strongLabel = new JLabel("All keyboard characters");
+        JLabel mediumLabel = new JLabel("Alpha numeric");
+        JLabel weakLabel = new JLabel("Just the alphabet");
+        JLabel numericLabel = new JLabel("Numeric only");
+
+        ////SETUP THE TEXT FIELD ////
         final JTextField passwordLengthField = new JTextField("8", 10);
 
-
+        //// SETUP THE BUTTON ////
         JButton addBtn = new JButton("Generate");
-
         addBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -39,7 +45,7 @@ public class DetailsPanel extends JPanel implements ActionListener {
             }
         });
 
-        //Create the radio buttons.
+        //// SETUP RADIO BUTTONS ////
         JRadioButton strongButton = new JRadioButton(strongString);
         strongButton.setMnemonic(KeyEvent.VK_B);
         strongButton.setActionCommand(strongString);
@@ -74,39 +80,44 @@ public class DetailsPanel extends JPanel implements ActionListener {
 
         GridBagConstraints gc = new GridBagConstraints();
 
-        //// First column, first row ////
+        //// SETUP THE LAYOUT ////
         gc.anchor = GridBagConstraints.LINE_START;
         gc.weightx = 0.5;
         gc.weighty = 0.5;
 
+        // First column
         gc.gridx = 0;
         gc.gridy = 0;
         add(strongButton, gc);
-        add(mediumButton, gc);
-        add(weakButton, gc);
-        add(numberButton, gc);
-
-        add(passwordLabel, gc);
-        //// First column, second row ////
-        gc.anchor = GridBagConstraints.LINE_END;
-
-        gc.gridx = 0;
         gc.gridy = 1;
-
+        add(mediumButton, gc);
+        gc.gridy = 2;
+        add(weakButton, gc);
+        gc.gridy = 3;
+        add(numberButton, gc);
+        gc.gridy = 4;
+        gc.anchor = GridBagConstraints.LINE_END;
         add(passwordLabel, gc);
 
-        //// Second column, first row ////
+        // Second column
         gc.anchor = GridBagConstraints.LINE_START;
         gc.gridx = 1;
+        gc.gridy = 0;
+        add(strongLabel, gc);
         gc.gridy = 1;
+        add(mediumLabel, gc);
+        gc.gridy = 2;
+        add(weakLabel, gc);
+        gc.gridy = 3;
+        add(numericLabel, gc);
+        gc.gridy = 4;
         add(passwordLengthField, gc);
 
 
-        //// Final Row ////
+        // Final Row
         gc.weighty = 10;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gc.gridx = 1;
-        gc.gridy = 2;
+        gc.gridy = 5;
         add(addBtn, gc);
     }
 
@@ -133,6 +144,6 @@ public class DetailsPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
+        CharLists.setStrength(e.getActionCommand());
     }
 }
