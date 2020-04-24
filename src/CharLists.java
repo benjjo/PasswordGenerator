@@ -59,9 +59,12 @@ public class CharLists {
         } else if (CharLists.Strength.equals("Weak")) {
             finish = CharLists.NUMERIC.size();
             aList = CharLists.NUMERIC;
-        } else {
+        } else if (CharLists.Strength.equals("Numeric")) {
             finish = CharLists.ALPHA_NUMERIC_SPECIAL.size();
             aList = CharLists.ALPHA_NUMERIC_SPECIAL;
+        } else { // Defaults to a strong password.
+            finish = CharLists.ALPHA_NUMERIC.size();
+            aList = CharLists.ALPHA_NUMERIC;
         }
         for (int i = 0; i < length; i++) {
             val.append((char) aList.get(ThreadLocalRandom.current().nextInt(start, finish)));
