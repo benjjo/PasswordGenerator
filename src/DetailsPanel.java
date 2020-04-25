@@ -26,13 +26,14 @@ public class DetailsPanel extends JPanel implements ActionListener {
 
         ////SETUP THE LABELS ////
         JLabel passwordLabel = new JLabel("Password length: ");
-        JLabel strongLabel = new JLabel("All keyboard characters");
-        JLabel mediumLabel = new JLabel("Alpha numeric");
-        JLabel weakLabel = new JLabel("Just the alphabet");
-        JLabel numericLabel = new JLabel("Numeric only");
+        JLabel strongLabel = new JLabel("All characters...");
+        JLabel mediumLabel = new JLabel("Alpha numeric...");
+        JLabel weakLabel = new JLabel("Just the alphabet...");
+        JLabel numericLabel = new JLabel("Numeric only...");
 
         ////SETUP THE TEXT FIELD ////
         final JTextField passwordLengthField = new JTextField("8", 10);
+        final JTextField passwordGeneratedField = new JTextField(10);
 
         //// SETUP THE BUTTON ////
         JButton addBtn = new JButton("Generate");
@@ -86,7 +87,7 @@ public class DetailsPanel extends JPanel implements ActionListener {
         gc.weighty = 0.5;
 
         // First column
-        gc.gridx = 0;
+        gc.gridx = 1;
         gc.gridy = 0;
         add(strongButton, gc);
         gc.gridy = 1;
@@ -96,12 +97,12 @@ public class DetailsPanel extends JPanel implements ActionListener {
         gc.gridy = 3;
         add(numberButton, gc);
         gc.gridy = 4;
-        gc.anchor = GridBagConstraints.LINE_END;
-        add(passwordLabel, gc);
+        add(passwordLengthField, gc);
+
 
         // Second column
-        gc.anchor = GridBagConstraints.LINE_START;
-        gc.gridx = 1;
+        gc.anchor = GridBagConstraints.LINE_END;
+        gc.gridx = 0;
         gc.gridy = 0;
         add(strongLabel, gc);
         gc.gridy = 1;
@@ -110,15 +111,24 @@ public class DetailsPanel extends JPanel implements ActionListener {
         add(weakLabel, gc);
         gc.gridy = 3;
         add(numericLabel, gc);
+
+        gc.anchor = GridBagConstraints.LINE_START;
         gc.gridy = 4;
-        add(passwordLengthField, gc);
+        gc.anchor = GridBagConstraints.LINE_END;
+        add(passwordLabel, gc);
 
-
-        // Final Row
-        gc.weighty = 10;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        // Generate button Row
+        gc.gridx = 1;
+        gc.anchor = GridBagConstraints.LINE_START;
         gc.gridy = 5;
+        add(passwordGeneratedField, gc);
+
+        // Add the text panel where the password is written to
+        gc.weighty = 10;
+        gc.gridy = 6;
+        gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(addBtn, gc);
+        //
     }
 
     public void fireDetailEvent(DetailEvent event) { // Clearly this is just some kind of wizardry.
