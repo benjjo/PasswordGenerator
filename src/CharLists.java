@@ -50,13 +50,13 @@ public class CharLists {
         int start = 0, finish;
         List<Character> aList;
 
-        if (CharLists.Strength.equals("Numeric")) {
+        if (CharLists.Strength.equals("Medium")) {
             finish = CharLists.ALPHA_NUMERIC.size();
             aList = CharLists.ALPHA_NUMERIC;
         } else if (CharLists.Strength.equals("Weak")) {
             finish = CharLists.ALPHA.size();
             aList = CharLists.ALPHA;
-        } else if (CharLists.Strength.equals("Medium")) {
+        } else if (CharLists.Strength.equals("Numeric")) {
             finish = CharLists.NUMERIC.size();
             aList = CharLists.NUMERIC;
         } else if (CharLists.Strength.equals("Strong")) {
