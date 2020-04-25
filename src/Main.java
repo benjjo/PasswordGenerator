@@ -10,6 +10,7 @@ import javax.swing.*;
 public class Main {
 
     public static void main(String[] args) {
+        new CharLists();
         SwingUtilities.invokeLater(new Runnable() {
         @Override
         public void run () {
