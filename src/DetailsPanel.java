@@ -26,14 +26,14 @@ public class DetailsPanel extends JPanel implements ActionListener {
 
         ////SETUP THE LABELS ////
         JLabel passwordLabel = new JLabel("Password length: ");
-        JLabel strongLabel = new JLabel("All characters...");
-        JLabel mediumLabel = new JLabel("Alpha numeric...");
-        JLabel weakLabel = new JLabel("Just the alphabet...");
-        JLabel numericLabel = new JLabel("Numeric only...");
+        JLabel strongLabel = new JLabel("All characters   ");
+        JLabel mediumLabel = new JLabel("Alpha numeric   ");
+        JLabel weakLabel = new JLabel("Just the alphabet   ");
+        JLabel numericLabel = new JLabel("Numeric only   ");
 
         ////SETUP THE TEXT FIELD ////
         final JTextField passwordLengthField = new JTextField("8", 10);
-        final JTextField passwordGeneratedField = new JTextField(10);
+        final JTextArea generatedPWTextArea = new JTextArea(1, 10);
 
         //// SETUP THE BUTTON ////
         JButton addBtn = new JButton("Generate");
@@ -117,16 +117,18 @@ public class DetailsPanel extends JPanel implements ActionListener {
         gc.anchor = GridBagConstraints.LINE_END;
         add(passwordLabel, gc);
 
-        // Generate button Row
+        // Add the text panel where the password is written to
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.gridy = 5;
-        add(passwordGeneratedField, gc);
+        gc.gridwidth = 2;
+        add(generatedPWTextArea, gc);
 
-        // Add the text panel where the password is written to
+        // Generate button Row
+        gc.gridx = 0;
+        gc.anchor = GridBagConstraints.BASELINE;
         gc.weighty = 10;
         gc.gridy = 6;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(addBtn, gc);
         //
     }
