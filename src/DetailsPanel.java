@@ -7,16 +7,15 @@ import javax.swing.event.EventListenerList;
 
 public class DetailsPanel extends JPanel implements ActionListener {
 
-    static String strongString = "Strong";
-    static String mediumString = "Medium";
-    static String weakString = "Weak";
-    static String numericString = "Numeric";
+    final static String STRONG_STRING = "Strong";
+    final static String MEDIUM_STRING = "Medium";
+    final static String WEAK_STRING = "Weak";
+    final static String NUMERIC_STRING = "Numeric";
+    private EventListenerList listenerList = new EventListenerList();
+
     /**
      * Sets up the details panel on the left, with a lovely wee border.
      */
-
-    private EventListenerList listenerList = new EventListenerList();
-
     public DetailsPanel() {
         Dimension size = getPreferredSize();
         size.width = 250;
@@ -62,22 +61,22 @@ public class DetailsPanel extends JPanel implements ActionListener {
         });
 
         //// SETUP RADIO BUTTONS ////
-        JRadioButton strongButton = new JRadioButton(strongString);
+        JRadioButton strongButton = new JRadioButton(STRONG_STRING);
         strongButton.setMnemonic(KeyEvent.VK_B);
-        strongButton.setActionCommand(strongString);
+        strongButton.setActionCommand(STRONG_STRING);
         strongButton.setSelected(true);
 
-        JRadioButton mediumButton = new JRadioButton(mediumString);
+        JRadioButton mediumButton = new JRadioButton(MEDIUM_STRING);
         mediumButton.setMnemonic(KeyEvent.VK_C);
-        mediumButton.setActionCommand(mediumString);
+        mediumButton.setActionCommand(MEDIUM_STRING);
 
-        JRadioButton weakButton = new JRadioButton(weakString);
+        JRadioButton weakButton = new JRadioButton(WEAK_STRING);
         weakButton.setMnemonic(KeyEvent.VK_D);
-        weakButton.setActionCommand(weakString);
+        weakButton.setActionCommand(WEAK_STRING);
 
-        JRadioButton numberButton = new JRadioButton(numericString);
+        JRadioButton numberButton = new JRadioButton(NUMERIC_STRING);
         numberButton.setMnemonic(KeyEvent.VK_R);
-        numberButton.setActionCommand(numericString);
+        numberButton.setActionCommand(NUMERIC_STRING);
 
         //Group the radio buttons.
         ButtonGroup group = new ButtonGroup();
