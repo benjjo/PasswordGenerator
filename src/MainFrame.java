@@ -20,7 +20,8 @@ public class MainFrame extends JFrame {
             public void detailEventOccurred(DetailEvent event) {
                 String text = event.getText();
 
-                textArea.append(text);
+                //textArea.append(text);
+                textArea.insert(text, 0);
             }
         });
 
