@@ -36,7 +36,7 @@ public class DetailsPanel extends JPanel implements ActionListener {
         final JScrollPane generatedPWScrollArea = new JScrollPane(generatedPWTextArea);
         generatedPWScrollArea.setVerticalScrollBarPolicy(
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        generatedPWScrollArea.setPreferredSize(new Dimension(200, 50));
+        generatedPWScrollArea.setPreferredSize(new Dimension(200, 55));
         generatedPWTextArea.setLineWrap(true);
         generatedPWTextArea.setEditable(false);
 
@@ -46,7 +46,7 @@ public class DetailsPanel extends JPanel implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String length = passwordLengthField.getText().trim();
-                String LengthText = CharLists.generator(Integer.parseInt(length)) + "\n";
+                String LengthText = String.valueOf(CharLists.generator(Integer.parseInt(length)));
                 fireDetailEvent(new DetailEvent(this, LengthText));
             }
         });
