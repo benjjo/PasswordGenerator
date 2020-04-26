@@ -15,7 +15,7 @@ public class Main {
         @Override
         public void run () {
             JFrame frame = new MainFrame("Password GEN");
-            frame.setSize(266, 250); // sets the size of the frame
+            frame.setSize(266, 270); // sets the size of the frame
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // sets up JFrame to close when cancelled.
             frame.setVisible(true); // Draws the frame to the screen
         }});
