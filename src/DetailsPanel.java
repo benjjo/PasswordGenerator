@@ -41,8 +41,8 @@ public class DetailsPanel extends JPanel implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String length = passwordLengthField.getText().trim();
-                String text = CharLists.generator(Integer.parseInt(length)) + "\n";
-                fireDetailEvent(new DetailEvent(this, text));
+                String LengthText = CharLists.generator(Integer.parseInt(length)) + "\n";
+                fireDetailEvent(new DetailEvent(this, LengthText));
             }
         });
 
