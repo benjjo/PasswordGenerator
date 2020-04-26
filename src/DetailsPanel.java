@@ -19,7 +19,7 @@ public class DetailsPanel extends JPanel implements ActionListener {
 
     public DetailsPanel() {
         Dimension size = getPreferredSize();
-        size.width = 260;
+        size.width = 250;
         setPreferredSize(size);
 
         setBorder(BorderFactory.createTitledBorder("Control Panel"));
@@ -31,9 +31,12 @@ public class DetailsPanel extends JPanel implements ActionListener {
         JLabel weakLabel = new JLabel("Just the alphabet   ");
         JLabel numericLabel = new JLabel("Numeric only   ");
 
-        ////SETUP THE TEXT FIELD ////
+        ////SETUP THE TEXT FIELDS ////
         final JTextField passwordLengthField = new JTextField("8", 10);
-        final JTextArea generatedPWTextArea = new JTextArea(1, 10);
+        final JTextArea generatedPWTextArea = new JTextArea(2, 20);
+        generatedPWTextArea.setLineWrap(true);
+        generatedPWTextArea.setWrapStyleWord(true);
+        JScrollPane scrollPane = new JScrollPane(generatedPWTextArea);
 
         //// SETUP THE BUTTON ////
         JButton addBtn = new JButton("Generate");
@@ -43,6 +46,15 @@ public class DetailsPanel extends JPanel implements ActionListener {
                 String length = passwordLengthField.getText().trim();
                 String LengthText = CharLists.generator(Integer.parseInt(length)) + "\n";
                 fireDetailEvent(new DetailEvent(this, LengthText));
+            }
+        });
+
+        ////SETUP THE OUTPUT BOX////
+        addDetailListener(new DetailListener(){
+            public void detailEventOccurred(DetailEvent event) {
+                String text = event.getText();
+
+                generatedPWTextArea.setText(text);
             }
         });
 
@@ -118,15 +130,13 @@ public class DetailsPanel extends JPanel implements ActionListener {
         add(passwordLabel, gc);
 
         // Add the text panel where the password is written to
-        gc.gridx = 1;
-        gc.anchor = GridBagConstraints.LINE_START;
+        gc.gridx = 0;
+        gc.anchor = GridBagConstraints.BASELINE;
         gc.gridy = 5;
         gc.gridwidth = 2;
         add(generatedPWTextArea, gc);
 
         // Generate button Row
-        gc.gridx = 0;
-        gc.anchor = GridBagConstraints.BASELINE;
         gc.weighty = 10;
         gc.gridy = 6;
         add(addBtn, gc);
