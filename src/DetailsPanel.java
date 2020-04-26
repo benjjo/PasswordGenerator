@@ -32,7 +32,7 @@ public class DetailsPanel extends JPanel implements ActionListener {
         JLabel numericLabel = new JLabel("Numeric only   ");
 
         ////SETUP THE TEXT FIELDS ////
-        final JTextField passwordLengthField = new JTextField("64", 10);
+        final JTextField passwordLengthField = new JTextField("8", 10);
         final JTextArea generatedPWTextArea = new JTextArea();
         final JScrollPane generatedPWScrollArea = new JScrollPane(generatedPWTextArea);
         generatedPWScrollArea.setVerticalScrollBarPolicy(
@@ -137,7 +137,6 @@ public class DetailsPanel extends JPanel implements ActionListener {
         gc.anchor = GridBagConstraints.BASELINE;
         gc.gridy = 5;
         gc.gridwidth = 2;
-        //add(generatedPWTextArea, gc);
         add(generatedPWScrollArea, gc);
 
         // Generate button Row
