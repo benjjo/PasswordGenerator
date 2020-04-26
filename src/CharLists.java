@@ -62,7 +62,7 @@ public class CharLists {
         } else if (CharLists.Strength.equals("Strong")) {
             finish = CharLists.ALPHA_NUMERIC_SPECIAL.size();
             aList = CharLists.ALPHA_NUMERIC_SPECIAL;
-        } else { // Default
+        } else { // Default - How did we even get here?
             finish = CharLists.ALPHA_NUMERIC.size();
             aList = CharLists.ALPHA_NUMERIC;
         }
