@@ -31,7 +31,7 @@ public class DetailsPanel extends JPanel implements ActionListener {
         JLabel numericLabel = new JLabel("Numeric only   ");
 
         ////SETUP THE TEXT FIELDS ////
-        final JTextField passwordLengthField = new JTextField("8", 10);
+        final JTextField passwordLengthField = new JTextField("8", 3);
         final JTextArea generatedPWTextArea = new JTextArea();
         final JScrollPane generatedPWScrollArea = new JScrollPane(generatedPWTextArea);
         generatedPWScrollArea.setVerticalScrollBarPolicy(
