@@ -28,8 +28,6 @@ public class Main {
                 e.printStackTrace();
             }
 
-            frame.setVisible(true);
-
             frame.setVisible(true); // Draws the frame to the screen
         }});
     }
