@@ -1,0 +1,9 @@
+Repeated history length			8
+Characters not allowed			+&"'
+Disallow user name				True
+Minimum numeric characters		1
+Required characters				!@#$%?
+Disallow user ID				True
+Minimum alphabetic characters	4
+Maximum repeated characters		2
+Minimum length					8
