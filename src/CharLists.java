@@ -107,36 +107,70 @@ public class CharLists {
      * Filters out the CAF non compliant passwords and generates another until the specification is met.
      */
     public static boolean CAFIntegrityCheck(String password){
-        int alphaCount = 0;
-        char[] charArray = password.toCharArray();
+
         if(!CharLists.Strength.equals("CAF Type")){
             return false;
         } else {
-            // Count alpha characters
-            for(Character alpha : CharLists.ALPHA) {
-                if (password.contains(alpha.toString())) {
-                    alphaCount++;
-                }
-            }
-            // Test for alpha character count >= 4
-            if(alphaCount < 4){
-                return true;
-            }
-            // Count and check the repeated characters
-            for(Character repeated : charArray){
-                long count = password.chars().filter(ch -> ch == repeated).count();
-                if(count > 2){
-                    return true;
-                }
-            }
-            // Finally check for a required character
-            for(Character good : CharLists.REQUIRED_CAF_LIST){
-                if(password.contains(good.toString())){
-                    return false;
-                }
+            return (CharLists.testForFourCharacters(password) &&
+                    CharLists.testForRepeatedChars(password) &&
+                    CharLists.testForRequiredChar(password) &&
+                    CharLists.testForNumericChar(password));
+        }
+    }
+
+    /**
+     * Tests to see if the password has at least 4 numeric characters
+     */
+    public static boolean testForFourCharacters(String password){
+        int alphaCount = 0;
+        for(Character alpha : CharLists.ALPHA) {
+            if (password.contains(alpha.toString())) {
+                alphaCount++;
             }
         }
-    return true;
+        // Test for alpha character count < 4
+        if(alphaCount < 4){
+            return false;   // Fails
+        }
+        return true;        // Passes test
+    }
+
+    /**
+     * Tests for repeated characters. More than 2 repeated characters are rejected.
+     */
+    public static boolean testForRepeatedChars(String password){
+        char[] charArray = password.toCharArray();
+        for(Character repeated : charArray){
+            long count = password.chars().filter(ch -> ch == repeated).count();
+            if(count > 2){
+                return false;   // Fails test
+            }
+        }
+        return true;            // Passes test
+    }
+
+    /**
+     * Tests that at least one required character is present.
+     */
+    public static boolean testForRequiredChar(String password){
+        for(Character good : CharLists.REQUIRED_CAF_LIST){
+            if(password.contains(good.toString())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Tests for at least one numeric character.
+     */
+    public static boolean testForNumericChar(String password){
+        for(Character num : CharLists.NUMERIC){
+            if(password.contains(num.toString())){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
