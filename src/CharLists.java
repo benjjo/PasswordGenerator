@@ -107,9 +107,29 @@ public class CharLists {
      * Filters out the CAF non compliant passwords and generates another until the specification is met.
      */
     public static boolean CAFIntegrityCheck(String password){
+        int alphaCount = 0;
+        char[] charArray = password.toCharArray();
         if(!CharLists.Strength.equals("CAF Type")){
             return false;
         } else {
+            // Count alpha characters
+            for(Character alpha : CharLists.ALPHA) {
+                if (password.contains(alpha.toString())) {
+                    alphaCount++;
+                }
+            }
+            // Test for alpha character count >= 4
+            if(alphaCount < 4){
+                return true;
+            }
+            // Count and check the repeated characters
+            for(Character repeated : charArray){
+                long count = password.chars().filter(ch -> ch == repeated).count();
+                if(count > 2){
+                    return true;
+                }
+            }
+            // Finally check for a required character
             for(Character good : CharLists.REQUIRED_CAF_LIST){
                 if(password.contains(good.toString())){
                     return false;
