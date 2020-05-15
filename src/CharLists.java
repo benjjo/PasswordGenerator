@@ -111,7 +111,7 @@ public class CharLists {
         if(!CharLists.Strength.equals("CAF Type")){
             return false;
         } else {
-            return (CharLists.testForFourCharacters(password) &&
+            return !(CharLists.testForFourCharacters(password) &&
                     CharLists.testForRepeatedChars(password) &&
                     CharLists.testForRequiredChar(password) &&
                     CharLists.testForNumericChar(password));
