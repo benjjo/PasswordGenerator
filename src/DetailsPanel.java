@@ -8,6 +8,7 @@ import javax.swing.event.EventListenerList;
 public class DetailsPanel extends JPanel implements ActionListener {
 
     final static String STRONG_STRING = "Strong";
+    final static String CAF_STRING = "CAF Type";
     final static String MEDIUM_STRING = "Medium";
     final static String WEAK_STRING = "Weak";
     final static String NUMERIC_STRING = "Numeric";
@@ -26,6 +27,7 @@ public class DetailsPanel extends JPanel implements ActionListener {
         ////SETUP THE LABELS ////
         JLabel passwordLabel = new JLabel("Password length: ");
         JLabel strongLabel = new JLabel("All characters   ");
+        JLabel CAFLabel = new JLabel("CAF Specific   ");
         JLabel mediumLabel = new JLabel("Alpha numeric   ");
         JLabel weakLabel = new JLabel("Just the alphabet   ");
         JLabel numericLabel = new JLabel("Numeric only   ");
@@ -64,14 +66,18 @@ public class DetailsPanel extends JPanel implements ActionListener {
         JRadioButton strongButton = new JRadioButton(STRONG_STRING);
         strongButton.setMnemonic(KeyEvent.VK_B);
         strongButton.setActionCommand(STRONG_STRING);
-        strongButton.setSelected(true);
+
+        JRadioButton CAFButton = new JRadioButton(CAF_STRING);
+        CAFButton.setMnemonic(KeyEvent.VK_D);
+        CAFButton.setActionCommand(CAF_STRING);
+        CAFButton.setSelected(true);
 
         JRadioButton mediumButton = new JRadioButton(MEDIUM_STRING);
         mediumButton.setMnemonic(KeyEvent.VK_C);
         mediumButton.setActionCommand(MEDIUM_STRING);
 
         JRadioButton weakButton = new JRadioButton(WEAK_STRING);
-        weakButton.setMnemonic(KeyEvent.VK_D);
+        weakButton.setMnemonic(KeyEvent.VK_E);
         weakButton.setActionCommand(WEAK_STRING);
 
         JRadioButton numberButton = new JRadioButton(NUMERIC_STRING);
@@ -81,12 +87,14 @@ public class DetailsPanel extends JPanel implements ActionListener {
         //Group the radio buttons.
         ButtonGroup group = new ButtonGroup();
         group.add(strongButton);
+        group.add(CAFButton);
         group.add(mediumButton);
         group.add(weakButton);
         group.add(numberButton);
 
         //Register a listener for the radio buttons.
         strongButton.addActionListener(this);
+        CAFButton.addActionListener(this);
         mediumButton.addActionListener(this);
         weakButton.addActionListener(this);
         numberButton.addActionListener(this);
@@ -105,12 +113,14 @@ public class DetailsPanel extends JPanel implements ActionListener {
         gc.gridy = 0;
         add(strongButton, gc);
         gc.gridy = 1;
-        add(mediumButton, gc);
+        add(CAFButton, gc);
         gc.gridy = 2;
-        add(weakButton, gc);
+        add(mediumButton, gc);
         gc.gridy = 3;
-        add(numberButton, gc);
+        add(weakButton, gc);
         gc.gridy = 4;
+        add(numberButton, gc);
+        gc.gridy = 5;
         add(passwordLengthField, gc);
 
 
@@ -120,27 +130,29 @@ public class DetailsPanel extends JPanel implements ActionListener {
         gc.gridy = 0;
         add(strongLabel, gc);
         gc.gridy = 1;
-        add(mediumLabel, gc);
+        add(CAFLabel, gc);
         gc.gridy = 2;
-        add(weakLabel, gc);
+        add(mediumLabel, gc);
         gc.gridy = 3;
+        add(weakLabel, gc);
+        gc.gridy = 4;
         add(numericLabel, gc);
 
         gc.anchor = GridBagConstraints.LINE_START;
-        gc.gridy = 4;
+        gc.gridy = 5;
         gc.anchor = GridBagConstraints.LINE_END;
         add(passwordLabel, gc);
 
         // Add the text panel where the password is written to
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.BASELINE;
-        gc.gridy = 5;
+        gc.gridy = 6;
         gc.gridwidth = 2;
         add(generatedPWScrollArea, gc);
 
         // Generate button Row
         gc.weighty = 10;
-        gc.gridy = 6;
+        gc.gridy = 7;
         add(addBtn, gc);
         //
     }

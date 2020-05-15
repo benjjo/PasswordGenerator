@@ -6,7 +6,10 @@ public class CharLists {
     public static final List<Character> ALPHA_NUMERIC = new ArrayList<>();
     public static final List<Character> NUMERIC = new ArrayList<>();
     public static final List<Character> ALPHA_NUMERIC_SPECIAL = new ArrayList<>();
-    public static String Strength = "Strong";
+    public static final List<Character> BAD_CAF_LIST = new ArrayList<>();
+    public static final List<Character> REQUIRED_CAF_LIST = new ArrayList<>();
+    public static List<Character> CAF_LIST;
+    public static String Strength = "CAF Type";
 
     /**
      * Constructor for instantiation of the ArrayLists.
@@ -31,6 +34,27 @@ public class CharLists {
         for(int i = 33; i <= 126; i++ ) {
             CharLists.ALPHA_NUMERIC_SPECIAL.add((char)i);
         }
+
+        // Sets up the BAD_CAF_LIST
+        CharLists.BAD_CAF_LIST.add('+');
+        CharLists.BAD_CAF_LIST.add('&');
+        CharLists.BAD_CAF_LIST.add('\"');
+        CharLists.BAD_CAF_LIST.add('\'');
+        CharLists.BAD_CAF_LIST.add('`');
+
+        // Sets up the REQUIRED_CAF_LIST
+        CharLists.REQUIRED_CAF_LIST.add('!');
+        CharLists.REQUIRED_CAF_LIST.add('@');
+        CharLists.REQUIRED_CAF_LIST.add('#');
+        CharLists.REQUIRED_CAF_LIST.add('$');
+        CharLists.REQUIRED_CAF_LIST.add('%');
+        CharLists.REQUIRED_CAF_LIST.add('?');
+
+        // Sets up the GOOD_CAF_LIST
+        CharLists.CAF_LIST = new ArrayList<>(CharLists.ALPHA_NUMERIC_SPECIAL);
+        for(Character i : CharLists.BAD_CAF_LIST){
+            CharLists.CAF_LIST.remove(i);
+        }
     }
 
     /**
@@ -44,11 +68,12 @@ public class CharLists {
      * Generates a random char between 33-128 and assigns that char to the
      * string var to the length of the args argument.
      */
-    public static StringBuilder generator(int length) {
+    public static String generator(int length) {
 
-        StringBuilder val = new StringBuilder(length);
         int start = 0, finish;
         List<Character> aList;
+        StringBuilder val = new StringBuilder(length);
+        String password;
 
         if (CharLists.Strength.equals("Medium")) {
             finish = CharLists.ALPHA_NUMERIC.size();
@@ -62,14 +87,45 @@ public class CharLists {
         } else if (CharLists.Strength.equals("Strong")) {
             finish = CharLists.ALPHA_NUMERIC_SPECIAL.size();
             aList = CharLists.ALPHA_NUMERIC_SPECIAL;
+        } else if (CharLists.Strength.equals("CAF Type")) {
+            finish = CharLists.CAF_LIST.size();
+            aList = CharLists.CAF_LIST;
         } else { // Default - How did we even get here?
             finish = CharLists.ALPHA_NUMERIC.size();
             aList = CharLists.ALPHA_NUMERIC;
         }
+
+        password = CharLists.generatorLoop(aList, length, start, finish, val);
+        while(CharLists.CAFIntegrityCheck(password)){
+            val.delete(start, finish);
+            password = CharLists.generatorLoop(aList, length, start, finish, val);
+        }
+        return password;
+    }
+
+    /**
+     * Filters out the CAF non compliant passwords and generates another until the specification is met.
+     */
+    public static boolean CAFIntegrityCheck(String password){
+        if(!CharLists.Strength.equals("CAF Type")){
+            return false;
+        } else {
+            for(Character good : CharLists.REQUIRED_CAF_LIST){
+                if(password.contains(good.toString())){
+                    return false;
+                }
+            }
+        }
+    return true;
+    }
+
+    /**
+     * Generates the random password into a StringBuilder
+     */
+    public static String generatorLoop(List<Character> aList, int length, int start, int finish, StringBuilder val){
         for (int i = 0; i < length; i++) {
             val.append((char) aList.get(ThreadLocalRandom.current().nextInt(start, finish)));
         }
-        return val;
+        return val.toString();
     }
-
 }
