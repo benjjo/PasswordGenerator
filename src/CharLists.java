@@ -30,7 +30,7 @@ public class CharLists {
             CharLists.ALPHA_NUMERIC.add((char)i);
             CharLists.NUMERIC.add((char)i);
         }
-        //Adds all.
+        //Adds keyboard chars to the ALPHA_NUMERIC_SPECIAL
         for(int i = 33; i <= 126; i++ ) {
             CharLists.ALPHA_NUMERIC_SPECIAL.add((char)i);
         }
@@ -105,6 +105,8 @@ public class CharLists {
 
     /**
      * Filters out the CAF non compliant passwords and generates another until the specification is met.
+     *
+     * @return false if tests passed or strength is not of "CAF Type", true otherwise.
      */
     public static boolean CAFIntegrityCheck(String password){
 
@@ -120,6 +122,8 @@ public class CharLists {
 
     /**
      * Tests to see if the password has at least 4 numeric characters
+     *
+     * @return true if test passed, false otherwise.
      */
     public static boolean testForFourCharacters(String password){
         int alphaCount = 0;
@@ -137,6 +141,8 @@ public class CharLists {
 
     /**
      * Tests for repeated characters. More than 2 repeated characters are rejected.
+     *
+     * @return true if test passed, false otherwise.
      */
     public static boolean testForRepeatedChars(String password){
         char[] charArray = password.toCharArray();
@@ -151,6 +157,8 @@ public class CharLists {
 
     /**
      * Tests that at least one required character is present.
+     *
+     * @return true if test passed, false otherwise.
      */
     public static boolean testForRequiredChar(String password){
         for(Character good : CharLists.REQUIRED_CAF_LIST){
@@ -163,6 +171,8 @@ public class CharLists {
 
     /**
      * Tests for at least one numeric character.
+     *
+     * @return true if test passed, false otherwise.
      */
     public static boolean testForNumericChar(String password){
         for(Character num : CharLists.NUMERIC){
@@ -174,7 +184,7 @@ public class CharLists {
     }
 
     /**
-     * Generates the random password into a StringBuilder
+     * Generates a random password into a StringBuilder
      */
     public static String generatorLoop(List<Character> aList, int length, int start, int finish, StringBuilder val){
         for (int i = 0; i < length; i++) {
